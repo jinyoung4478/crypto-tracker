@@ -1,7 +1,9 @@
+import { Helmet } from "react-helmet";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoins } from "./api";
+import Controller from "../components/Controller";
 
 const Container = styled.div`
 padding: 0px 20px;
@@ -16,11 +18,14 @@ justify-content: center;
 align-items: center;
 `;
 
-const CoinsList = styled.ul``;
+const CoinsList = styled.ul`
+`;
 
 const Coin = styled.li`
-background-color: white;
+//background-color: ${(props) => props.theme.textColor};
+background-color: ${(props) => props.theme.boxColor};
 color: ${(props) => props.theme.bgColor};
+font-size: 18px;
 border-radius: 15px;
 margin-bottom: 10px;
 transition: color;
@@ -59,7 +64,8 @@ interface ICoin {
 };
 
 const Title = styled.h1`
-font-size: 48px;
+font-size: 30px;
+text-align: center;
 color: ${(props) => props.theme.accentColor};
 `;
 
@@ -67,8 +73,12 @@ function Coins() {
     const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins)
     return (
         <Container>
+            <Helmet>
+                <title>JRYPTO</title>
+            </Helmet>
             <Header>
-                <Title>코인</Title>
+                <Controller />
+                <Title>100 CRYPTOCURRENCY</Title>
             </Header>
             {isLoading ? (
                 <Loader>isLoading...</Loader>

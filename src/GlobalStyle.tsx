@@ -52,6 +52,7 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   background-color: ${props => props.theme.bgColor};
   color: ${props => props.theme.textColor};
+  transition: all 0.4s ease-in-out;
 }
 a {
   text-decoration: none;

@@ -1,4 +1,5 @@
 import { useQuery } from "react-query";
+import { Helmet } from "react-helmet";
 import { fetchCoinInfo, fetchCoinTickers } from "./api";
 import {
     useParams,
@@ -8,6 +9,7 @@ import {
 } from "react-router";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Controller from "../components/Controller";
 
 const Tabs = styled.div`
   display: grid;
@@ -149,12 +151,21 @@ function Coin() {
     );
     const { isLoading: tickersLoading, data: tickersData } = useQuery<IPriceData>(
         ["tickers", coinId],
-        () => fetchCoinTickers(coinId!)
+        () => fetchCoinTickers(coinId!),
+        {
+            refetchInterval: 5000,
+        }
     );
     const loading = infoLoading || tickersLoading;
     return (
         <Container>
+            <Helmet>
+                <title>
+                    JRYPTO - {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
+                </title>
+            </Helmet>
             <Header>
+                <Controller />
                 <Title>
                     {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
                 </Title>
@@ -173,8 +184,8 @@ function Coin() {
                             <span>${infoData?.symbol}</span>
                         </OverviewItem>
                         <OverviewItem>
-                            <span>Open Source:</span>
-                            <span>{infoData?.open_source ? "Yes" : "No"}</span>
+                            <span>Price :</span>
+                            <span>{tickersData?.quotes.USD.price.toFixed(3)}</span>
                         </OverviewItem>
                     </Overview>
                     <Description>{infoData?.description}</Description>
@@ -196,7 +207,7 @@ function Coin() {
                             <Link to={`/${coinId}/price`}>Price</Link>
                         </Tab>
                     </Tabs>
-                    <Outlet />
+                    <Outlet context={{ coinId }} />
                 </>
             )}
         </Container>
