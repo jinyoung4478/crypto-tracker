@@ -165,7 +165,7 @@ function Coin() {
         <Container>
             <Helmet>
                 <title>
-                    JRYPTO - {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
+                    JYPTO - {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
                 </title>
             </Helmet>
             <Header>

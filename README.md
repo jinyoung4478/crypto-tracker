@@ -1,46 +1,68 @@
-# Getting Started with Create React App
+<h1 id="top">JYPTO - Crypto Tracker</h1>
+<br>
+<br>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 개요
 
-## Available Scripts
+- 100종류의 암호화폐 실시간 가격변동 사항을 확인할 수 있는 Crypto Tracker 웹앱
+- 각 코인별 상세 정보를 확인
+- 다크모드 기능 추가
+  <br>
+  <br>
 
-In the project directory, you can run:
+## 사용기술
 
-### `npm start`
+- JavaScript
+- React
+- TypeScript
+- React-query
+- Styled-components
+  <br>
+  <br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 개발 환경
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- **OS** : Window
+- **Frontend**: React, TypeScript
+- **IDE** : VS Code
+  <br>
+  <br>
 
-### `npm test`
+## 배포 URL
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+https://jinyoung4478.github.io/crypto-tracker/
 
-### `npm run build`
+<br>
+<br>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 프로젝트 구조
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+ |   .gitignore
+ |   package.json
+ |   README.md
+ |   tsconfig.json
+ |
+ └ src
+    |   App.tsx
+    |   atoms.ts
+    |   GlobalStyle.tsx
+    |   index.tsx
+    |   Router.tsx
+    |   styled.d.ts
+    |   theme.ts
+    |
+    └ components
+    |       ChartButton.tsx
+    |       Controller.tsx
+    |
+    └ routes
+            api.ts
+            Chart.tsx
+            Coin.tsx
+            Coins.tsx
+            Price.tsx
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+<br>
+<p align="right"><a href="#top">Go to Top</a></p>
