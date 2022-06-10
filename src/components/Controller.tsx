@@ -1,22 +1,24 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { darkAtom } from '../atoms';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse } from '@fortawesome/free-solid-svg-icons';
+import { HiSun } from 'react-icons/hi';
+import { IoMoon } from 'react-icons/io5';
+import { AiFillHome } from "react-icons/ai"
 
 const Container = styled.div`
-position: fixed;
+position: absolute;
 top: 0;
-width: 100%;
-padding: 20px 0;
+width: 480px;
 `;
 
 const BackButton = styled.button`
 font-size: 0.8rem;
-position: absolute;
-color: white;
-left: 20vw;
+position: relative;
+color: ${(props) => props.theme.textColor};
+font-size: 2rem;
+top: 10px;
+left: 0;
 width: 3.5rem;
 height: 3.5rem;
 background-color: transparent;
@@ -24,7 +26,7 @@ border: none;
 border-radius: 50%;
 cursor: pointer;
 &:hover {
-    background-color: black;
+    color: ${(props) => props.theme.textColor};
     -webkit-transition: 0.4s;
     transition: 0.4s;
 }
@@ -32,10 +34,11 @@ cursor: pointer;
 
 const SwitchButton = styled.label`
 position: absolute;
-left: 70vw;
+left: 80%;
+top: 20px;
 display: inline-block;
-width: 3.4rem;
-height: 1.9rem;
+width: 3.8rem;
+height: 2rem;
 vertical-align: middle;
 input {
     display: none;
@@ -43,7 +46,7 @@ input {
 input:checked + span:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
-    transform: translateX(1.2rem);
+    transform: translateX(1.6rem);
 }
 `;
 
@@ -54,7 +57,7 @@ top: 0;
 left: 0;
 right: 0;
 bottom: 0;
-background-color: #ccc;
+background-color: ${(props) => props.theme.btnBgColor};
 -webkit-transition: 0.4s;
 transition: 0.4s;
 border-radius: 1rem;
@@ -63,13 +66,24 @@ border-radius: 1rem;
     content: "";
     height: 1.5rem;
     width: 1.5rem;
-    left: 0.3rem;
-    bottom: 0.2rem;
-    background-color: white;
+    left: 0.4rem;
+    bottom: 0.25rem;
+    background-color: ${(props) => props.theme.btnColor};
     -webkit-transition: 0.4s;
     transition: 0.4s;
     border-radius: 50%;
 }
+svg:first-child {
+    margin-left: 0.6rem;
+    margin-bottom: 0.1rem;
+    font-size: 1.3rem;
+    color: yellow;
+  }
+  svg:nth-child(2) {
+    margin-top: 0.3rem;
+    font-size: 1.5rem;
+    color: tomato;
+  }
 `;
 
 interface IProps {
@@ -78,21 +92,25 @@ interface IProps {
 
 const Controller = () => {
     const setDarkAtom = useSetRecoilState(darkAtom);
-    const isDarkMode = useRecoilValue(darkAtom);
-    const toggleSwitch = () => setDarkAtom(isDarkMode => !isDarkMode);
+    const toggleSwitch = () => setDarkAtom((prev) => !prev);
     const location = useLocation();
     return (
         <Container>
-            {location.pathname === "/" ? null : (
+            {location.pathname === "/" ? (
+                null
+            ) : (
                 <BackButton>
                     <Link to="/">
-                        <FontAwesomeIcon icon={faHouse} size="2x" />
+                        <AiFillHome />
                     </Link>
                 </BackButton>
             )}
             <SwitchButton>
                 <input type="checkbox" />
-                <Slider onClick={toggleSwitch} />
+                <Slider onClick={toggleSwitch}>
+                    <IoMoon />
+                    <HiSun />
+                </Slider>
             </SwitchButton>
         </Container>
     )

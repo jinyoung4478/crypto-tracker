@@ -6,7 +6,7 @@ import { fetchCoins } from "./api";
 import Controller from "../components/Controller";
 
 const Container = styled.div`
-padding: 0px 20px;
+padding: 20px;
 max-width: 480px;
 margin: 0 auto;
 `;
@@ -18,14 +18,19 @@ justify-content: center;
 align-items: center;
 `;
 
+const Title = styled.h1`
+font-size: 30px;
+text-align: center;
+color: ${(props) => props.theme.textColor};
+`;
+
 const CoinsList = styled.ul`
 `;
 
 const Coin = styled.li`
-//background-color: ${(props) => props.theme.textColor};
 background-color: ${(props) => props.theme.boxColor};
 color: ${(props) => props.theme.bgColor};
-font-size: 18px;
+font-size: 20px;
 border-radius: 15px;
 margin-bottom: 10px;
 transition: color;
@@ -37,6 +42,7 @@ a {
 }
 &:hover {
     a {
+        font-size: 22px;
         color: ${((props) => props.theme.accentColor)}
     }
 }
@@ -63,22 +69,16 @@ interface ICoin {
     type: string,
 };
 
-const Title = styled.h1`
-font-size: 30px;
-text-align: center;
-color: ${(props) => props.theme.accentColor};
-`;
-
 function Coins() {
     const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins)
     return (
         <Container>
             <Helmet>
-                <title>JRYPTO</title>
+                <title>JYPTO</title>
             </Helmet>
             <Header>
                 <Controller />
-                <Title>100 CRYPTOCURRENCY</Title>
+                <Title>JYPTO - CRYPTO TRACKER</Title>
             </Header>
             {isLoading ? (
                 <Loader>isLoading...</Loader>

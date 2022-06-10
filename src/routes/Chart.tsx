@@ -2,6 +2,7 @@ import { useQuery } from "react-query";
 import { useOutletContext } from "react-router-dom";
 import { fetchCoinHistory } from "./api";
 import ApexChart from "react-apexcharts";
+import ChartButton from "../components/ChartButton";
 
 interface IHistoricalData {
     time_open: string;
@@ -78,6 +79,7 @@ function Chart() {
                     }}
                 />
             )}
+            <ChartButton></ChartButton>
         </div>
     )
 }

@@ -11,6 +11,54 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Controller from "../components/Controller";
 
+const Container = styled.div`
+padding: 20px;
+max-width: 480px;
+margin: 0 auto;
+`;
+
+const Title = styled.h1`
+font-size: 48px;
+color: ${(props) => props.theme.textColor};
+`;
+
+const Header = styled.header`
+height: 10vh;
+display: flex;
+justify-content: center;
+align-items: center;
+`;
+
+export const Overview = styled.div`
+  display: flex;
+  justify-content: space-between;
+  background-color: ${(props) => props.theme.shadowColor};
+  padding: 10px 20px;
+  border-radius: 10px;
+`;
+
+const OverviewItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  span:first-child {
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    color: ${(props) => props.theme.textColor};
+  }
+`;
+const Description = styled.p`
+  margin: 20px 0px;
+  font-size: 18px;
+`;
+
+const Loader = styled.span`
+    text-align: center;
+    display: block;
+`;
+
 const Tabs = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -21,9 +69,9 @@ const Tabs = styled.div`
 const Tab = styled.span<{ isActive: boolean }>`
   text-align: center;
   text-transform: uppercase;
-  font-size: 15px;
-  font-weight: 500;
-  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 18px;
+  font-weight: 600;
+  background-color: ${(props) => props.theme.shadowColor};
   padding: 10px 0px;
   border-radius: 10px;
   color: ${(props) =>
@@ -31,51 +79,6 @@ const Tab = styled.span<{ isActive: boolean }>`
   a {
     display: block;
   }
-`;
-
-const Overview = styled.div`
-  display: flex;
-  justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px 20px;
-  border-radius: 10px;
-`;
-const OverviewItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  span:first-child {
-    font-size: 10px;
-    font-weight: 400;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-  }
-`;
-const Description = styled.p`
-  margin: 20px 0px;
-`;
-
-const Loader = styled.span`
-    text-align: center;
-    display: block;
-`;
-
-const Header = styled.header`
-height: 10vh;
-display: flex;
-justify-content: center;
-align-items: center;
-`;
-
-const Title = styled.h1`
-font-size: 48px;
-color: ${(props) => props.theme.accentColor};
-`;
-
-const Container = styled.div`
-padding: 0px 20px;
-max-width: 480px;
-margin: 0 auto;
 `;
 
 interface RouteState {
@@ -157,6 +160,7 @@ function Coin() {
         }
     );
     const loading = infoLoading || tickersLoading;
+    const priceInfo = tickersData?.quotes.USD;
     return (
         <Container>
             <Helmet>
@@ -176,27 +180,27 @@ function Coin() {
                 <>
                     <Overview>
                         <OverviewItem>
-                            <span>Rank:</span>
+                            <span>Rank</span>
                             <span>{infoData?.rank}</span>
                         </OverviewItem>
                         <OverviewItem>
-                            <span>Symbol:</span>
+                            <span>Symbol</span>
                             <span>${infoData?.symbol}</span>
                         </OverviewItem>
                         <OverviewItem>
-                            <span>Price :</span>
+                            <span>Price</span>
                             <span>{tickersData?.quotes.USD.price.toFixed(3)}</span>
                         </OverviewItem>
                     </Overview>
                     <Description>{infoData?.description}</Description>
                     <Overview>
                         <OverviewItem>
-                            <span>Total Suply:</span>
-                            <span>{tickersData?.total_supply}</span>
+                            <span>Total Suply</span>
+                            <span>{tickersData?.total_supply.toLocaleString()}</span>
                         </OverviewItem>
                         <OverviewItem>
-                            <span>Max Supply:</span>
-                            <span>{tickersData?.max_supply}</span>
+                            <span>Max Supply</span>
+                            <span>{tickersData?.max_supply.toLocaleString()}</span>
                         </OverviewItem>
                     </Overview>
                     <Tabs>
@@ -207,7 +211,7 @@ function Coin() {
                             <Link to={`/${coinId}/price`}>Price</Link>
                         </Tab>
                     </Tabs>
-                    <Outlet context={{ coinId }} />
+                    <Outlet context={{ coinId, priceInfo }} />
                 </>
             )}
         </Container>
