@@ -5,7 +5,7 @@
 ## 개요
 
 - 100종류의 암호화폐 실시간 가격변동 사항을 확인할 수 있는 Crypto Tracker 웹앱
-- 각 코인별 상세 정보를 확인
+- 암호화폐 선택 시 해당 정보 확인 가능
 - 다크모드 기능 추가
   <br>
   <br>
@@ -24,7 +24,6 @@
 
 - **OS** : Window
 - **Frontend**: React, TypeScript
-- **IDE** : VS Code
   <br>
   <br>
 
