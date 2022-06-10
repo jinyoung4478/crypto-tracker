@@ -3,6 +3,8 @@ import { useOutletContext } from "react-router-dom";
 import { fetchCoinHistory } from "./api";
 import ApexChart from "react-apexcharts";
 import ChartButton from "../components/ChartButton";
+import { useRecoilValue } from "recoil";
+import { chartAtom } from '../atoms';
 
 interface IHistoricalData {
     time_open: string;
@@ -19,14 +21,17 @@ interface IChartProps {
     coinId: string;
 }
 
+
 function Chart() {
     const { coinId } = useOutletContext<IChartProps>();
+    const isLineChart = useRecoilValue(chartAtom);
     const { isLoading, data } = useQuery<IHistoricalData[]>(
         ["ohlcv", coinId], () => fetchCoinHistory(coinId),
         {
             refetchInterval: 10000,
         }
     );
+    console.log(isLineChart ? "line" : "candlestick")
     return (
         <div>
             {isLoading ? (

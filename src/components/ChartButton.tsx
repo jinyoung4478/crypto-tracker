@@ -1,4 +1,7 @@
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
+import { chartAtom } from '../atoms';
+
 const Container = styled.div`
   width: 100%;
   display: flex;
@@ -54,7 +57,8 @@ span {
 `;
 
 const ChartButton = () => {
-    const toggleSwitch = () => { console.log("hello") }
+    const setLineAtom = useSetRecoilState(chartAtom);
+    const toggleSwitch = () => setLineAtom((prev) => !prev);
     return (
         <Container>
             <SwitchButton>
